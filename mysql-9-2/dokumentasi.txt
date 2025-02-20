@@ -1,0 +1,5 @@
+docker build -t php-fpm-myunand .
+docker-compose up -d
+docker exec -it idcontainer
+    composer install
+    
