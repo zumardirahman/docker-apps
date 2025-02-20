@@ -1,0 +1,6 @@
+docker build -t php-fpm-myunand .
+docker-compose up -d
+docker exec -it idcontainer
+    composer install
+
+docker run --rm -v $(pwd):/app -w /app php:8.2-cli php script.php

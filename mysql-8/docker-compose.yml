@@ -1,0 +1,22 @@
+services:
+  dbmysql8:
+    image: mysql:8.0
+    container_name: database-mysql-8
+    volumes:
+      - database-mysql8-data:/var/lib/mysql  # Menggunakan volume yang didefinisikan
+      # - ./my.cnf:/etc/mysql/conf.d/my.cnf
+    environment:
+      - MYSQL_ROOT_PASSWORD=toor12345
+      # - MYSQL_DATABASE=myunand
+      # - MYSQL_PASSWORD=myunand12345
+      # - MYSQL_USER=myunand
+    ports:
+      - "3306:3306"
+    networks:
+      - myunand_network
+
+networks:
+  myunand_network:
+
+volumes:
+  database-mysql8-data:  # Mendefinisikan volume di sini
