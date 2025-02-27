@@ -1,19 +1,20 @@
 services:
-  dbmysql92:
-    image: mysql:9.2.0
-    container_name: database-mysql-9-2
+  database:
+    image: mysql:9.2
+    container_name: database-mysql92
     volumes:
-      - database-mysql92-data:/var/lib/mysql
+      - data-mysql92:/var/lib/mysql
       # - ./my.cnf:/etc/mysql/conf.d/my.cnf
     environment:
       - MYSQL_ROOT_PASSWORD=toor12345
     ports:
-      - "3306:3306"
+      - "3309:3306"
     networks:
-      - myunand_network
+      - unand_network
 
 networks:
-  myunand_network:
+  unand_network:
+    external: true
 
 volumes:
-  database-mysql92-data:
+  data-mysql92:
