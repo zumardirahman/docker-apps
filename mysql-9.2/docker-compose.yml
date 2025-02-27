@@ -6,7 +6,7 @@ services:
       - data-mysql92:/var/lib/mysql
       # - ./my.cnf:/etc/mysql/conf.d/my.cnf
     environment:
-      - MYSQL_ROOT_PASSWORD=toor12345
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
     ports:
       - "3309:3306"
     networks:
