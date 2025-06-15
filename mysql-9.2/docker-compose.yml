@@ -7,8 +7,8 @@ services:
       # - ./my.cnf:/etc/mysql/conf.d/my.cnf
     environment:
       - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
-    ports:
-      - "3309:3306"
+    # ports:
+    #   - "3306:3306"
     expose:
       - "3306"
     networks:
