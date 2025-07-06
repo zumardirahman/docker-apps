@@ -1,0 +1,12 @@
+services:
+  phpmyadmin:
+    image: phpmyadmin
+    container_name: phpmyadmin
+    ports:
+      - "8081:80" # phpMyAdmin akan diakses pada http://localhost:8080
+    environment:
+      PMA_HOST: host.docker.internal # Alamat MySQL di host
+      PMA_PORT: 3306 # Port default MySQL
+      PMA_USER: root # Ganti dengan username MySQL Anda
+      PMA_PASSWORD: toor # Ganti dengan password MySQL Anda
+    restart: always

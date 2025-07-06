@@ -1,0 +1,36 @@
+version: "3.8"
+
+services:
+  database:
+    image: mysql:8.4
+    container_name: mysql84-db
+    environment:
+      - MYSQL_ROOT_PASSWORD=root_password
+    volumes:
+      - mysql84_data:/var/lib/mysql
+    ports:
+      - "3306:3306"
+    networks:
+      - unand_network
+
+  phpmyadmin:
+    image: phpmyadmin:latest
+    container_name: phpmyadmin
+    depends_on:
+      - database
+    environment:
+      - PMA_HOST=database
+      - PMA_PORT=3306
+      - PMA_USER=root
+      - PMA_PASSWORD=root_password
+    ports:
+      - "8081:80"
+    networks:
+      - unand_network
+
+networks:
+  unand_network:
+    external: true
+
+volumes:
+  mysql_data:
