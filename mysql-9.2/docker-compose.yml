@@ -23,6 +23,8 @@ services:
       - PMA_USER=root
       - PMA_PASSWORD=${MYSQL_ROOT_PASSWORD}
       - PMA_ARBITRARY=1
+    volumes:
+      - ./php.ini:/usr/local/etc/php/conf.d/uploads.ini
     ports:
       - "8081:80"
     depends_on:
