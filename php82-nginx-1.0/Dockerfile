@@ -48,6 +48,9 @@ COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 RUN mkdir -p /var/www/html \
  && chown -R www-data:www-data /var/www
 
+RUN mkdir -p /var/log/app \
+ && chown -R www-data:www-data /var/log/app
+
 WORKDIR /var/www/html
 
 COPY supervisord.conf /etc/supervisor/supervisord.conf
