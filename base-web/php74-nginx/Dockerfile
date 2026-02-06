@@ -47,7 +47,7 @@ RUN docker-php-ext-configure gd \
     mysqli \
     pdo \
     pdo_mysql \
-    pdo_sqlite \
+    # pdo_sqlite \
     pcntl \
     posix \
     pspell \
