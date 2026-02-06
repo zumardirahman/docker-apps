@@ -1,5 +1,8 @@
 FROM php:7.4-fpm
 
+# ===============================
+# OS & system dependencies
+# ===============================
 RUN apt-get update && apt-get install -y \
     nginx \
     supervisor \
@@ -14,77 +17,61 @@ RUN apt-get update && apt-get install -y \
     libfreetype6-dev \
     libxml2-dev \
     libonig-dev \
-    libtidy-dev \
-    libxslt1-dev \
-    libmemcached-dev \
-    libbz2-dev \
-    libpspell-dev \
-    libsnmp-dev \
     libsodium-dev \
+    libmagickwand-dev \
+    imagemagick \
  && rm -rf /var/lib/apt/lists/*
 
-# GD
+# ===============================
+# GD configuration
+# ===============================
 RUN docker-php-ext-configure gd \
     --with-freetype \
-    --with-jpeg \
- && docker-php-ext-install \
+    --with-jpeg
+
+# ===============================
+# PHP extensions (CMS essentials)
+# ===============================
+RUN docker-php-ext-install \
     bcmath \
-    bz2 \
-    calendar \
-    ctype \
     curl \
-    dba \
     dom \
     exif \
     fileinfo \
-    ftp \
     gd \
-    gettext \
-    iconv \
     intl \
     json \
     mbstring \
     mysqli \
     pdo \
     pdo_mysql \
-    # pdo_sqlite \
-    pcntl \
-    posix \
-    pspell \
-    shmop \
     simplexml \
     soap \
-    sockets \
-    sysvmsg \
-    sysvsem \
-    sysvshm \
-    tidy \
-    tokenizer \
+    sodium \
     xml \
-    xmlreader \
-    xmlwriter \
-    xsl \
     zip \
     opcache
 
-# PECL (legacy-friendly)
-RUN pecl install \
-    memcache-4.0.5.2 \
-    memcached-3.1.5 \
-    igbinary \
-    msgpack \
-    redis \
- && docker-php-ext-enable \
-    memcache \
-    memcached \
-    igbinary \
-    msgpack \
-    redis
+# ===============================
+# Imagick (PECL)
+# ===============================
+RUN pecl install imagick \
+ && docker-php-ext-enable imagick
 
+# ===============================
+# Redis (optional but common)
+# ===============================
+RUN pecl install redis \
+ && docker-php-ext-enable redis
+
+# ===============================
 # Composer
+# ===============================
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
-# Standard folders
+# ===============================
+# Standard directories
+# ===============================
 RUN mkdir -p /var/www/html /var/log/app \
  && chown -R www-data:www-data /var/www /var/log/app
 
