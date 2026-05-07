@@ -11,7 +11,7 @@ services:
     ports:
       - "3307:3306"
     networks:
-      - unand_network
+      - unand_network_2
 
   phpmyadmin:
     image: phpmyadmin:5.2
@@ -27,11 +27,11 @@ services:
     depends_on:
       - database
     networks:
-      - unand_network
+      - unand_network_2
 
 networks:
-  unand_network:
-    external: true
+  unand_network_2:
+    # external: true
 
 volumes:
   data-mysql57:
